@@ -1,25 +1,25 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import Todo from "./Todo";
 import "./TodoList.css";
 
 import NewTodo from "./NewTodo";
+import Divider from "./Divider";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: ["Item #1", "Item #2", "Item #3"] };
+    const [item1, item2, ...rest] = [
+      "Write some code",
+      "Change the world",
+      "Take a nap",
+      "Eat a cookie"
+    ];
+    this.state = {
+      items: [item1, item2, rest.join(" and ")]
+    };
 
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
-  }
-  renderItems() {
-    return this.state.items.map(description => (
-      <Todo
-        key={description}
-        description={description}
-        removeTodo={this.removeTodo}
-      />
-    ));
   }
   addTodo(item) {
     this.setState({ items: [...this.state.items, item] });
@@ -29,6 +29,18 @@ class TodoList extends Component {
       return description !== removeItem;
     });
     this.setState({ items: filteredItems });
+  }
+  renderItems() {
+    return this.state.items.map(description => (
+      <Fragment key={"item-" + description}>
+        <Todo
+          key={description}
+          description={description}
+          removeTodo={this.removeTodo}
+        />
+        <Divider key={"divide-" + description} />
+      </Fragment>
+    ));
   }
   render() {
     return (

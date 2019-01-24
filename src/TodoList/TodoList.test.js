@@ -4,8 +4,8 @@ import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
 import TodoList from "./TodoList";
-import NewTodo from "./NewTodo";
-import Todo from "./Todo";
+import NewTodo from "../NewTodo/NewTodo";
+import Todo from "../Todo/Todo";
 
 describe(TodoList, () => {
   const component = shallow(<TodoList />);
@@ -42,7 +42,7 @@ describe(TodoList, () => {
     expect(after).toBeGreaterThan(before);
   });
 
-  it("removes a Todo from the list when the remove greeting function is called", () => {
+  it("removes a Todo from the list when the remove todo function is called", () => {
     const before = component.find(Todo).length;
     const removeMe = component.state("items")[0];
     component.instance().removeTodo(removeMe);

@@ -1,0 +1,10 @@
+@import "../shared";
+
+.mood {
+  border: 2px solid black;
+  text-align: center;
+  background: $todo-normal;
+  color: #333;
+  margin: 20px;
+  padding: 20px;
+}
